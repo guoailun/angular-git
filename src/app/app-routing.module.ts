@@ -8,24 +8,14 @@ const appRoutes: Routes = [
     },
     {
         path: 'api-management',
-        data: { title: 'API接口管理' },
+        data: { title: 'API接口分类查看' },
         loadChildren: './compontents/api-management/api-management.module#ApiManagementModule'
     },
     {
         path: 'api-search/:name',
         data: { title: 'API搜索详情' },
         loadChildren: './compontents/api-search/api-search.module#ApiSearchModule'
-    },
-    // {
-    //     path: 'domainPrefixManagement',
-    //     data: { title: '域名前缀管理' },
-    //     loadChildren: './components/domainName/domain-name.module#DomainNameModule'
-    // },
-    // {
-    //     path: 'responseCodeManagement',
-    //     data: { title: '返回码管理' },
-    //     loadChildren: './components/responseCode/response-code.module#ResponseCodeModule'
-    // }
+    }
 ];
 
 @NgModule({
