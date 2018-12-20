@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiSearchService } from './api-search.service';
 import { NzNotificationService } from 'ng-cosmos-ui';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
     selector: 'app-api-search',
@@ -15,12 +16,25 @@ export class ApiSearchComponent implements OnInit {
     catalogId: any;
     interfaceData = [];
     total: any = 1;
+    value: any;                // 传递到top组件里
     constructor(
         private service: ApiSearchService,
-        private notification: NzNotificationService
+        private notification: NzNotificationService,
+        private activatedRoute: ActivatedRoute
     ) { }
 
     ngOnInit() {
+        this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+            console.log(params);
+            this.value = params.get('name');
+            this.queryParams = {'name' : this.value};
+            // this.refreshData(true);
+        });
+    }
+
+    // 搜索值
+    saveValue(value: any) {
+
     }
 
     // 查询接口列表
@@ -30,14 +44,10 @@ export class ApiSearchComponent implements OnInit {
         }
         this.loading = true;
         const params = this.queryParams || {};
-        if (this.catalogId) {
-            params['catalogId'] = this.catalogId;
-        }
-
         params.page = this.pageIndex;
         params.pageSize = this.pageSize;
 
-        this.service.getInterfaceList(params).subscribe((response) => {
+        this.service.getInterfaceList(params).subscribe((response: any) => {
             if (response.code === 200) {
                 this.loading = false;
                 this.interfaceData = response.data.data;
@@ -47,6 +57,12 @@ export class ApiSearchComponent implements OnInit {
 
             }
         });
+    }
+
+    // 查看API接口详情
+    detail() {
+        window.open(`/api/#/api-management;id=${393}`);
+        // this.router.navigate(['/api-management', {'id': 393}]);
     }
 
 }

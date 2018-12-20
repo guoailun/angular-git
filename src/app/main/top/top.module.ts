@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { TopComponent } from './top.component';
 import { NgZorroAntdModule } from 'ng-cosmos-ui';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BreadcrumbModule } from '../breadcrumb/breadcrumb.module';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -13,7 +12,6 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     RouterModule,
     NgZorroAntdModule,
-    BreadcrumbModule
   ],
   declarations: [TopComponent],
   exports: [TopComponent]

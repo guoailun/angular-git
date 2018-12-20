@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-top',
@@ -6,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./top.component.less']
 })
 export class TopComponent implements OnInit {
+    @Output() saveValue = new EventEmitter<any>();
+    @Input() set value(value: any) {
+        console.log(value);
+        if (value) {
+            this.searchValue = value;
+        }
+    }
+    index = 1;
+    searchValue: any;
     menuList: any = [
         {
             label: 'API接口管理',
@@ -34,11 +44,9 @@ export class TopComponent implements OnInit {
             icon: 'anticon anticon-calendar'
         }
     ];
-
-    index = 1;
-    searchValue: any;
-    queryParams: any = {};
-    constructor() { }
+    constructor(
+        private router: Router
+    ) { }
 
     ngOnInit() {
     }
@@ -53,16 +61,14 @@ export class TopComponent implements OnInit {
         if (type === 'click') {
             if (event) {
                 event = event.replace(/(^\s*)|(\s*$)/g, '');
+                that.router.navigate(['/api-search', {'name': event}]);
             }
-            that.queryParams = { version: event };
-            // that.refreshData(true);
         } else {
             if (event.keyCode === 13) {
                 if (that.searchValue) {
                     that.searchValue = that.searchValue.replace(/(^\s*)|(\s*$)/g, '');
+                    that.router.navigate(['/api-search', {'name': that.searchValue}]);
                 }
-                that.queryParams = { version: that.searchValue };
-                // that.refreshData(true);
             }
         }
     }

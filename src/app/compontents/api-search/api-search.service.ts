@@ -8,6 +8,10 @@ import {catchError} from 'rxjs/operators';
 export class ApiSearchService extends CurdService {
     baseUrl = '/apimanager-api';
 
+    constructor(private injector: Injector) {
+        super(injector);
+    }
+
     // 获取接口列表
     getInterfaceList(params: any) {
         const str = this.getParams(params);
@@ -24,9 +28,5 @@ export class ApiSearchService extends CurdService {
             }
         }
         return '?' + arr.join('&');
-    }
-
-    constructor(private injector: Injector) {
-        super(injector);
     }
 }

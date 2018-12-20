@@ -134,7 +134,7 @@
     line-height: 46px;
 }
 
-:host ::ng-deep .see-interface-one-content-child-textarea {
+:host ::ng-deep .api-center-content-one-child-textarea {
     background: rgba(23,35,61,0.03);
     border: 1px solid rgba(23,35,61,0.15);
     overflow-x: auto;
@@ -142,6 +142,15 @@
     width: 100%;
     height: 200px;
 }
+
+:host ::ng-deep .api-center-content-one-content {
+    padding: 20px 24px;
+}
+
+
+
+
+
 
 :host ::ng-deep .ant-select-selection {
     border: none;

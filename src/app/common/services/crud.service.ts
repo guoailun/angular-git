@@ -1,6 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NzMessageService } from 'ng-cosmos-ui';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class CurdService {
@@ -18,6 +19,7 @@ export class CurdService {
         this.http = this.baseInjector.get(HttpClient);
         this.message = this.baseInjector.get(NzMessageService);
         CurdService.that = this;
+        this.baseUrl = '/apimanager-api';
     }
 
     public handleGood = (response: any) => {
@@ -38,15 +40,21 @@ export class CurdService {
      * 错误处理
      * @param error
      */
-    public handleError(error: any): Promise<any> {
-        error = error.currentTarget;
-        const errorCallback: any = {
-            status: error.status,
-            title: '错误',
-            message: '错误'
-        };
-        return Promise.reject(errorCallback);
-    }
+    handleError(error: HttpErrorResponse) {
+        if (error.error instanceof ErrorEvent) {
+          // A client-side or network error occurred. Handle it accordingly.
+          console.log('An error occurred:', error.error.message);
+        } else {
+          // The backend returned an unsuccessful response code.
+          // The response body may contain clues as to what went wrong,
+          console.log(
+            `Backend returned code ${error.status}, ` +
+            `body was: ${error.error}`);
+        }
+        // return an observable with a user-facing error message
+        return throwError(
+          'Something bad happened; please try again later.');
+      }
 
     /**
      * 传参公共方法

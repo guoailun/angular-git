@@ -19,6 +19,7 @@
     font-family: PingFangSC-Medium;
     font-size: 18px;
     color: #0B1100;
+    cursor: pointer;
 }
 
 :host ::ng-deep .api-search-one-desc {

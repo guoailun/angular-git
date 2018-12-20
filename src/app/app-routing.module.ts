@@ -12,7 +12,7 @@ const appRoutes: Routes = [
         loadChildren: './compontents/api-management/api-management.module#ApiManagementModule'
     },
     {
-        path: 'api-search/:name',
+        path: 'api-search',
         data: { title: 'API搜索详情' },
         loadChildren: './compontents/api-search/api-search.module#ApiSearchModule'
     }
